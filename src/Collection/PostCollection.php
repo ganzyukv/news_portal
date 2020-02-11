@@ -1,13 +1,11 @@
 <?php
-
+declare(strict_types=1);
 
 namespace App\Collection;
 
-
 use App\Model\Post;
-use Exception;
 use IteratorAggregate;
-use Traversable;
+use ArrayIterator;
 
 final class PostCollection implements IteratorAggregate
 {
@@ -31,6 +29,6 @@ final class PostCollection implements IteratorAggregate
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->posts);
+        return new ArrayIterator($this->posts);
     }
 }

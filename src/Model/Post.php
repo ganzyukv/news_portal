@@ -3,11 +3,14 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use DateTime;
+
 class Post
 {
     private $id;
     private $category;
     private $title;
+    private $body;
     private $shortDescription;
     private $image;
     private $publicationDate;
@@ -41,6 +44,24 @@ class Post
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBody(): ?string
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param mixed $body
+     * @return Post
+     */
+    public function setBody($body): self
+    {
+        $this->body = $body;
+        return $this;
     }
 
     /**
@@ -80,18 +101,18 @@ class Post
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getPublicationDate(): ?\DateTime
+    public function getPublicationDate(): ?DateTime
     {
         return $this->publicationDate;
     }
 
     /**
-     * @param \DateTime $publicationDate
+     * @param DateTime $publicationDate
      * @return Post
      */
-    public function setPublicationDate(\DateTime $publicationDate): self
+    public function setPublicationDate(DateTime $publicationDate): self
     {
         $this->publicationDate = $publicationDate;
         return $this;

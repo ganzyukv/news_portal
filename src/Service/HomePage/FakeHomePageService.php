@@ -1,8 +1,6 @@
 <?php
-
-
+declare(strict_types=1);
 namespace App\Service\HomePage;
-
 
 use App\Collection\PostCollection;
 use App\Model\Category;

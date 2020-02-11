@@ -69,7 +69,7 @@
             {% for post in posts %}
                 <article class="post">
                     <a href="#" class="category-link">{{ post.category.name }}</a>
-                    <a href="#"><h4>{{ post.title }}</h4></a>
+                    <a href="{{ path('post_view', {id: post.id}) }}"><h4>{{ post.title }}</h4></a>
                     <time>{{ post.publicationDate | date('d-m-Y H:i') }}</time>
                 </article>
             {% endfor %}
