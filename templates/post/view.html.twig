@@ -7,6 +7,7 @@
 {% block body %}
     <article class="full">
         <h1>{{ post.title }}</h1>
+        <h4>{{ post.category.name }}</h4>
         <time>{{ post.publicationDate | date('d-m-Y H:i') }}</time>
         <div class="content">
             {{ post.body | raw }}
