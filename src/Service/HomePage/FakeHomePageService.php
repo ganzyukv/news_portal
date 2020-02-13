@@ -18,7 +18,7 @@ final class FakeHomePageService implements HomePageServiceInterface
         for ($i = 0; $i < 10; $i++) {
             $post = new Post(
                 $faker->randomNumber(),
-                new Category($faker->sentence),
+                new Category($faker->randomNumber(), $faker->slug, $faker->sentence),
                 $faker->sentence()
             );
             $post->setImage($faker->imageUrl())

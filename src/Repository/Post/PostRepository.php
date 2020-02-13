@@ -3,10 +3,11 @@
 namespace App\Repository\Post;
 
 use App\Entity\Post;
-use App\Service\Post\PostPresentationInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Query\QueryException;
 
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,22 +25,55 @@ class PostRepository extends ServiceEntityRepository implements PostRepositoryIn
     /**
      * @param int $id
      * @return Post|null
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws QueryException
      */
     public function findById(int $id): ?Post
     {
         try {
             return $this->createQueryBuilder('p')
+                ->addCriteria(self::createPublishedCriteria())
                 ->where('p.id = :id')
                 ->setParameter('id', $id)
-                ->andWhere('p.publicationDate IS NOT NULL')
                 ->innerJoin('p.category', 'c')
                 ->addSelect('c')
                 ->getQuery()
                 ->getOneOrNullResult();
+
         } catch (NonUniqueResultException $e) {
             //if result not unique
             return null;
         }
+    }
+
+    /**
+     * @param int $limit
+     * @param int|null $offset
+     * @return mixed|null
+     * @throws QueryException
+     */
+    public function findAllPublished(int $limit = 0, int $offset = null): ?array
+    {
+        try {
+            return $this->createQueryBuilder('p')
+                ->addCriteria(self::createPublishedCriteria())
+                ->innerJoin('p.category', 'c')
+                ->addSelect('c')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset)
+                ->getQuery()
+                ->getResult();
+        } catch (NonUniqueResultException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * @return Criteria
+     */
+    public static function createPublishedCriteria(): Criteria
+    {
+        return Criteria::create()->andWhere(
+            Criteria::expr()->neq('p.publicationDate', null)
+        );
     }
 }

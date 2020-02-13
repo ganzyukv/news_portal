@@ -11,10 +11,13 @@ final class PostMapper
 {
     public static function entityToModel(Post $entity): PostModel
     {
+        $category = $entity->getCategory();
+
         $model = new PostModel(
             $entity->getId(),
-            new Category($entity->getCategory()->getTitle()),
+            new Category($category->getId(), $category->getTitle(), $category->getSlug()),
             $entity->getTitle());
+
         $model->setPublicationDate($entity->getPublicationDate())
             ->setImage($entity->getImage())
             ->setBody($entity->getBody())

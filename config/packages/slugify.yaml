@@ -1,0 +1,5 @@
+cocur_slugify:
+  lowercase: true
+  separator: '-' # any string
+  # regexp: <string>
+  rulesets: ['armenian']
