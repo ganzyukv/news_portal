@@ -9,6 +9,8 @@
         <h1>{{ post.title }}</h1>
         <h4>{{ post.category.name }}</h4>
         <time>{{ post.publicationDate | date('d-m-Y H:i') }}</time>
+        <br/>
+        <img src="{{ asset('img/' ~post.image ) }}" width="200px" alt="{{ post.title }}">
         <div class="content">
             {{ post.body | raw }}
         </div>

@@ -66,6 +66,7 @@
             </div>
         </section>
         <section class="regular-posts">
+            {{ get_param('app.pagination_page_limit') }}
             {% for post in posts %}
                 <article class="post">
                     <a href="#" class="category-link">{{ post.category.name }}</a>

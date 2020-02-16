@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Post\PostRepository")
@@ -18,6 +19,7 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      */
     private $title;
 
@@ -110,11 +112,9 @@ class Post
         return $this->publicationDate;
     }
 
-    public function setPublicationDate(?\DateTime $publicationDate): self
+    public function publish()
     {
-        $this->publicationDate = $publicationDate;
-
-        return $this;
+        $this->publicationDate = new \DateTime();
     }
 
     public function getCategory(): Category

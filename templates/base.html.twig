@@ -14,11 +14,20 @@
 
 <main>
     <div class="container">
-        {#        {% for message in app.flashes('success') %}#}
-        {#            <div class="alert alert-success">#}
-        {#                {{ parse_url(message) }}#}
-        {#            </div>#}
-        {#        {% endfor %}#}
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {#                    {{ message }}#}
+                    {{ parse_url(message) }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {#                {% for message in app.flashes('success') %}#}
+        {#                    <div class="alert alert-success">#}
+        {#                    #}
+        {#                    </div>#}
+        {#                {% endfor %}#}
         {% block body %}
 
 
