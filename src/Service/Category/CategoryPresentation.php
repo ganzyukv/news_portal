@@ -16,9 +16,13 @@ final class CategoryPresentation implements CategoryPresentationInterface
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function getBySlug(string $slug): Category
+    public function getBySlug(string $slug): ?Category
     {
         $entity = $this->categoryRepository->findBySlug($slug);
+
+        if (null === $entity) {
+            return null;
+        }
 
         return CategoryMapper::entityToModel($entity);
     }

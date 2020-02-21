@@ -7,5 +7,5 @@ use App\Model\Category;
 
 interface CategoryPresentationInterface
 {
-    public function getBySlug(string $slug): Category;
+    public function getBySlug(string $slug): ?Category;
 }

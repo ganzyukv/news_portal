@@ -32,8 +32,14 @@ migrate: ## Runs application migrations.
 jumpin: ## Start shell into application container
 	docker-compose -f ${docker_file} exec ${APP_CONTAINER} /bin/bash
 
+run-test: ## Run tests in container
+	docker-compose -f ${docker_file} exec ${APP_CONTAINER} php ./bin/phpunit $(param)
+
 make_migration: ## Runs application migrations.
 	docker-compose exec ${APP_CONTAINER} ./bin/console make:migration
 
 tail-logs: ## Display all logs from containers
 	docker-compose -f ${docker_file} logs -f ${APP_CONTAINER}
+
+dps: ## Status docker containers
+	docker-compose -f ${docker_file} ps
